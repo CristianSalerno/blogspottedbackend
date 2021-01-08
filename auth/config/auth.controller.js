@@ -32,7 +32,7 @@ exports.loginUser = (req, res, next) => {
         if (err) return res.status(500).send('server error');
 
         if (!user) {
-            //email doesn't exist
+            //email doesn't exist   
             res.status(409).send({ message: 'Something is wrong' });
         } else {
             const resultPassword = userData.password;
