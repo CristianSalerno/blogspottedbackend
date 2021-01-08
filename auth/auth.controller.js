@@ -1,13 +1,15 @@
 const User = require('./auth.dao');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const salt = 10;
 require('dotenv').config();
 
 exports.createUser = (req, res, next) => {
+
     const newUser = {
-        name: res.body.name,
-        email: res.body.email,
-        password: res.body.password
+        name: req.body.name,
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password, salt)
     }
 
     User.create(newUser, (err, user) => {

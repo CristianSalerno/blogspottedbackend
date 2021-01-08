@@ -1,24 +1,30 @@
+
+'use strict'
+const cors = require('cors');
+const authRoutes = require('./auth/auth.routes');
 const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
+const properties = require('./config/properties');
+const DB = require('./config/db');
+// init DB
+DB();
+
 const app = express();
-const mongoose = require('mongoose');
+const router = express.Router();
 
-require('dotenv').config();
+const bodyParser = require('body-parser');
+const bodyParserJSON = bodyParser.json();
+const bodyParserURLEncoded = bodyParser.urlencoded({ extended: true });
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+app.use(bodyParserJSON);
+app.use(bodyParserURLEncoded);
 
+app.use(cors());
 
+app.use('/api', router);
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-app.use(express.static(path.join(__dirname, process.env.FRONTEND_URI)));
-
-app.listen(3000, () => {
-    console.log('server started')
+authRoutes(router);
+router.get('/', (req, res) => {
+    res.send('Hello from home');
 });
-
-
-
-module.exports = app;  
+app.use(router);
+app.listen(properties.PORT, () => console.log(`Server runing on port ${properties.PORT}`));
