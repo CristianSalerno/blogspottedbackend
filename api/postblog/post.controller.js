@@ -34,3 +34,15 @@ exports.getAllPost = (req, res, next) => {
         }
     })
 }
+
+exports.getPostById = (req, res, next) => {
+    const id = req.url.split('/')
+    Post.findById(id[2].toString(), (err,post)=>{ 
+        if (err){
+            next(err)
+        }
+        else{
+            res.send(post)
+        }
+    })
+}
