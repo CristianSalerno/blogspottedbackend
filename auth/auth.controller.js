@@ -59,7 +59,7 @@ exports.loginUser = (req, res, next) => {
                     accessToken: accessToken,
                     expiresIn: expiresIn
                 }
-
+                
                 res.send(dataUser);
             } else {
                 //wrong password
