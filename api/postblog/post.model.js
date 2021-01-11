@@ -11,8 +11,12 @@ const postSchema = new Scheema({
         type: String,
         required: true,
         trim: true,
-        unique: true
     },
+    postImg:{
+        type:String,
+        required: true,
+        trim: true,
+    }
 
 }, {
     timestamps: true

@@ -2,7 +2,7 @@
 'use strict'
 const cors = require('cors');
 const authRoutes = require('./auth/auth.routes');
-const postRoutes = require('./postblog/post.routes')
+const postRoutes = require('./api/postblog/post.routes')
 const express = require('express');
 const properties = require('./config/properties');
 const DB = require('./config/db');

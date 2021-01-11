@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
-const authSchema = require('./post.model');
+const postSchema = require('./post.model');
 
-authSchema.statics = {
+postSchema.statics = {
     createPost: function (data, cb) {
         const post = new this(data);
         post.save(cb);
     },
-    findPost: function (data, cb) {
+     findPost:  function (query, cb) {
         this.find(query, cb)
-    }
+    } 
 };
 
-const postModel = mongoose.model('Posts', authSchema);
+const postModel = mongoose.model('Posts', postSchema);
 module.exports = postModel;
